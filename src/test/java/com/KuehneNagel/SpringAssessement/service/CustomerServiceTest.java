@@ -38,8 +38,8 @@ class CustomerServiceTest {
 
         customer2 = new Customer();
         customer2.setId(2L);
-        customer2.setFullName("Smith");
-        customer2.setEmail("smith@gmail.com");
+        customer2.setFullName("Najat");
+        customer2.setEmail("Najat@gmail.com");
         customer2.setPhone("0987654321");
     }
 
