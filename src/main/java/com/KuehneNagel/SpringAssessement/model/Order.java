@@ -22,8 +22,7 @@ public class Order {
     private LocalDate orderDate;
 
 
-
     public void addOrderLineToOrder (OrderLine orderLine){
-        orderLines.add(orderLine);
+        this.orderLines.add(orderLine);
     }
 }

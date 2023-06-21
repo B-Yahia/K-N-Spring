@@ -27,12 +27,6 @@ class OrderServiceTest {
     @Mock
     private OrderRepository orderRepository;
 
-    @Mock
-    private CustomerService customerService;
-
-    @Mock
-    private ProductService productService;
-
     @InjectMocks
     private OrderService orderService;
 
@@ -57,7 +51,7 @@ class OrderServiceTest {
     public void saveOrderTest() {
         when(orderRepository.save(order1)).thenReturn(order1);
 
-        Order result = orderService.saveOrder(order1);
+        var result = orderService.saveOrder(order1);
 
         assertEquals(order1, result);
         verify(orderRepository, times(1)).save(order1);
@@ -67,7 +61,7 @@ class OrderServiceTest {
     public void findOrderByIdTest() {
         when(orderRepository.findById(1L)).thenReturn(Optional.of(order1));
 
-        Order result = orderService.findOrderById(1L);
+        var result = orderService.findOrderById(1L);
 
         assertEquals(order1, result);
         verify(orderRepository, times(1)).findById(1L);
@@ -85,7 +79,7 @@ class OrderServiceTest {
     public void getAllOrdersTest() {
         when(orderRepository.findAll()).thenReturn(Arrays.asList(order1));
 
-        List<Order> result = orderService.getAllOrders();
+        var result = orderService.getAllOrders();
 
         assertEquals(1, result.size());
         assertEquals(order1, result.get(0));
@@ -94,14 +88,14 @@ class OrderServiceTest {
 
     @Test
     public void addOrderLineToOrderTest() {
-        OrderLine orderLine = new OrderLine();
+        var orderLine = new OrderLine();
         orderLine.setQuantity(2);
         orderLine.setProduct(product1);
 
         when(orderRepository.findById(1L)).thenReturn(Optional.of(order1));
         when(orderRepository.save(order1)).thenReturn(order1);
 
-        Order result = orderService.addOrderLineToOrder(1L, orderLine);
+        var result = orderService.addOrderLineToOrder(1L, orderLine);
 
         assertEquals(order1, result);
         verify(orderRepository, times(1)).findById(1L);

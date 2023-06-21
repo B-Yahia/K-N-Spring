@@ -20,5 +20,13 @@ public class AppExceptionsHandler {
         return errors;
     }
 
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public Map<String,String> handleNotFoundEx (ResourceNotFoundException exception){
+        Map<String, String> errorMsg = new HashMap<>();
+        errorMsg.put("Message", exception.getMessage());
+        return  errorMsg;
+    }
+
 
 }

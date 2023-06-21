@@ -48,7 +48,7 @@ class ProductServiceTest {
     public void addProductTest() {
         when(productRepository.save(product1)).thenReturn(product1);
 
-        Product result = productService.addProduct(product1);
+        var result = productService.addProduct(product1);
 
         assertEquals(product1, result);
         verify(productRepository, times(1)).save(product1);
@@ -58,7 +58,7 @@ class ProductServiceTest {
     public void findProductByIdTest() {
         when(productRepository.findById(1L)).thenReturn(Optional.of(product1));
 
-        Product result = productService.findProductById(1L);
+        var result = productService.findProductById(1L);
 
         assertEquals(product1, result);
         verify(productRepository, times(1)).findById(1L);

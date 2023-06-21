@@ -2,6 +2,7 @@ package com.KuehneNagel.SpringAssessement.controller;
 
 import com.KuehneNagel.SpringAssessement.model.Product;
 import com.KuehneNagel.SpringAssessement.service.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,21 +16,24 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
-    @PostMapping("/add")
-    public ResponseEntity<Product> addProduct (@RequestBody Product product){
-        Product newProduct = productService.addProduct(product);
+    // Create product
+    @PostMapping
+    public ResponseEntity<Product> addProduct (@Valid @RequestBody Product product){
+        var newProduct = productService.addProduct(product);
         return new ResponseEntity<>(newProduct, HttpStatus.CREATED);
     }
 
+    //Find product by ID
     @GetMapping("/{id}")
     public ResponseEntity<Product> findProduct(@PathVariable Long id){
-        Product product = productService.findProductById(id);
+        var product = productService.findProductById(id);
         return new ResponseEntity<>(product, HttpStatus.OK);
     }
 
-    @GetMapping("/all")
+    // Get All products
+    @GetMapping
     public ResponseEntity<List<Product>> findAllProducts(){
-        List<Product> productList = productService.findAllProducts();
+        var productList = productService.findAllProducts();
         return new ResponseEntity<>(productList, HttpStatus.OK);
     }
 }

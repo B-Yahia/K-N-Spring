@@ -34,20 +34,20 @@ class CustomerServiceTest {
         customer1.setId(1L);
         customer1.setFullName("Yahya");
         customer1.setEmail("Yahya@gmail.com");
-        customer1.setPhone("1234567890");
+        customer1.setPhone("11111111111");
 
         customer2 = new Customer();
         customer2.setId(2L);
         customer2.setFullName("Najat");
         customer2.setEmail("Najat@gmail.com");
-        customer2.setPhone("0987654321");
+        customer2.setPhone("2222222222");
     }
 
     @Test
     public void addCustomerTest() {
         when(customerRepository.save(customer1)).thenReturn(customer1);
 
-        Customer result = customerService.addCustomer(customer1);
+        var result = customerService.addCustomer(customer1);
 
         assertEquals(customer1, result);
         verify(customerRepository, times(1)).save(customer1);
@@ -57,7 +57,7 @@ class CustomerServiceTest {
     public void findCustomerByIdTest() {
         when(customerRepository.findById(1L)).thenReturn(Optional.of(customer1));
 
-        Customer result = customerService.findCustomerById(1L);
+        var result = customerService.findCustomerById(1L);
 
         assertEquals(customer1, result);
         verify(customerRepository, times(1)).findById(1L);
@@ -75,7 +75,7 @@ class CustomerServiceTest {
     public void findAllCustomersTest() {
         when(customerRepository.findAll()).thenReturn(Arrays.asList(customer1, customer2));
 
-        List<Customer> result = customerService.findAllCustomers();
+        var result = customerService.findAllCustomers();
 
         assertEquals(2, result.size());
         assertEquals(customer1, result.get(0));

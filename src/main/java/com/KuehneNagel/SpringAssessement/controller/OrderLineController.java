@@ -15,24 +15,31 @@ public class OrderLineController {
     @Autowired
     private OrderLineService orderLineService;
 
+    //Create an OrderLine
     @PostMapping
     public ResponseEntity<OrderLine> createOrderLine(@RequestBody OrderLine orderLine){
-        OrderLine newOrderLine = orderLineService.saveOrderLine(orderLine);
+        var newOrderLine = orderLineService.saveOrderLine(orderLine);
         return new ResponseEntity<>(newOrderLine, HttpStatus.CREATED);
     }
+
+    //Find an OrderLine
     @GetMapping("/{id}")
     public ResponseEntity<OrderLine> findOrderLine(@PathVariable Long id){
-        OrderLine orderLine = orderLineService.findById(id);
+        var orderLine = orderLineService.findById(id);
         return new ResponseEntity<>(orderLine, HttpStatus.OK);
     }
-    @GetMapping("/all")
+
+    //Get all OrderLines
+    @GetMapping
     public ResponseEntity<List<OrderLine>> getAllOrderLines (){
-        List<OrderLine> orderLineList = orderLineService.getAllOrderLines();
+        var orderLineList = orderLineService.getAllOrderLines();
         return new ResponseEntity<>(orderLineList,HttpStatus.OK);
     }
+
+    //Edite the quantity in OrderLine
     @PutMapping("/edit-quantity/{id}/{quantity}")
     public ResponseEntity<OrderLine> editQuantityInOrderLine(@PathVariable Long id ,@PathVariable int quantity){
-        OrderLine orderLine = orderLineService.editQuantity(quantity,id);
+        var orderLine = orderLineService.editQuantity(quantity,id);
         return new ResponseEntity<>(orderLine,HttpStatus.OK);
     }
 }

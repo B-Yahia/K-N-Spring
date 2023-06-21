@@ -2,6 +2,7 @@ package com.KuehneNagel.SpringAssessement.controller;
 
 import com.KuehneNagel.SpringAssessement.model.Customer;
 import com.KuehneNagel.SpringAssessement.service.CustomerService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,23 +17,23 @@ public class CustomerController {
     private CustomerService customerService;
 
     //Create Customer entity
-    @PostMapping("/add")
-    public ResponseEntity<Customer> addCustomerToDB (@RequestBody Customer customer ){
-        Customer newCustomer = customerService.addCustomer(customer);
+    @PostMapping
+    public ResponseEntity<Customer> addCustomerToDB (@Valid @RequestBody Customer customer ){
+        var newCustomer = customerService.addCustomer(customer);
         return new ResponseEntity<>(newCustomer, HttpStatus.CREATED);
     }
 
-    //find customer by id
+    //Find customer by id
     @GetMapping("/{id}")
     public ResponseEntity<Customer> findCustomer(@PathVariable Long id){
-        Customer customer = customerService.findCustomerById(id);
+        var customer = customerService.findCustomerById(id);
         return new ResponseEntity<>(customer, HttpStatus.OK);
     }
 
-    // returnes all customer in the db
-    @GetMapping("/all")
+    // Returns all customer in the db
+    @GetMapping
     public ResponseEntity<List<Customer>> findAllCustomers(){
-        List<Customer> customersList = customerService.findAllCustomers();
+        var customersList = customerService.findAllCustomers();
         return new ResponseEntity<>(customersList, HttpStatus.OK);
     }
 

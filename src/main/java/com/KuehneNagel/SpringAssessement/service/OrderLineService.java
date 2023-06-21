@@ -1,5 +1,6 @@
 package com.KuehneNagel.SpringAssessement.service;
 
+import com.KuehneNagel.SpringAssessement.exception.ResourceNotFoundException;
 import com.KuehneNagel.SpringAssessement.model.OrderLine;
 import com.KuehneNagel.SpringAssessement.repository.OrderLineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,11 +18,11 @@ public class OrderLineService {
     }
 
     public OrderLine findById (long id){
-        return orderLineRepository.findById(id).orElseThrow(()-> new RuntimeException("No OrderLine found"));
+        return orderLineRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No OrderLine found"));
     }
 
     public OrderLine editQuantity (int quantity , long id ){
-        OrderLine orderLine = findById(id);
+        var orderLine = findById(id);
         orderLine.setQuantity(quantity);
         return saveOrderLine(orderLine);
     }

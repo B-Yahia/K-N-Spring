@@ -42,7 +42,7 @@ class OrderLineServiceTest {
     public void saveOrderLineTest() {
         when(orderLineRepository.save(orderLine1)).thenReturn(orderLine1);
 
-        OrderLine result = orderLineService.saveOrderLine(orderLine1);
+        var result = orderLineService.saveOrderLine(orderLine1);
 
         assertEquals(orderLine1, result);
         verify(orderLineRepository, times(1)).save(orderLine1);
@@ -52,7 +52,7 @@ class OrderLineServiceTest {
     public void findByIdTest() {
         when(orderLineRepository.findById(1L)).thenReturn(Optional.of(orderLine1));
 
-        OrderLine result = orderLineService.findById(1L);
+        var result = orderLineService.findById(1L);
 
         assertEquals(orderLine1, result);
         verify(orderLineRepository, times(1)).findById(1L);
@@ -71,7 +71,7 @@ class OrderLineServiceTest {
         when(orderLineRepository.findById(1L)).thenReturn(Optional.of(orderLine1));
         when(orderLineRepository.save(orderLine1)).thenReturn(orderLine1);
 
-        OrderLine result = orderLineService.editQuantity(5, 1L);
+        var result = orderLineService.editQuantity(5, 1L);
 
         assertEquals(5, result.getQuantity());
         verify(orderLineRepository, times(1)).findById(1L);
@@ -82,7 +82,7 @@ class OrderLineServiceTest {
     public void getAllOrderLinesTest() {
         when(orderLineRepository.findAll()).thenReturn(Arrays.asList(orderLine1, orderLine2));
 
-        List<OrderLine> result = orderLineService.getAllOrderLines();
+        var result = orderLineService.getAllOrderLines();
 
         assertEquals(2, result.size());
         assertEquals(orderLine1, result.get(0));

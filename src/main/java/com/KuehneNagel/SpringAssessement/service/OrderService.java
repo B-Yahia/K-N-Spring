@@ -1,5 +1,6 @@
 package com.KuehneNagel.SpringAssessement.service;
 
+import com.KuehneNagel.SpringAssessement.exception.ResourceNotFoundException;
 import com.KuehneNagel.SpringAssessement.model.Customer;
 import com.KuehneNagel.SpringAssessement.model.Order;
 import com.KuehneNagel.SpringAssessement.model.OrderLine;
@@ -26,30 +27,30 @@ public class OrderService {
         return  orderRepository.save(order);
     }
     public Order findOrderById (Long id){
-        return orderRepository.findById(id).orElseThrow(()-> new RuntimeException("No order found"));
+        return orderRepository.findById(id).orElseThrow(()-> new ResourceNotFoundException("No order found"));
     }
     public List<Order> getAllOrders (){
         return orderRepository.findAll();
     }
 
     public  Order addOrderLineToOrder (Long orderID, OrderLine orderLine){
-        Order order = findOrderById(orderID);
+        var order = findOrderById(orderID);
         order.addOrderLineToOrder(orderLine);
         return saveOrder(order);
     }
 
     public List<Order> getOrdersByCustomer(Long id) {
-        Customer customer = customerService.findCustomerById(id);
+        var customer = customerService.findCustomerById(id);
         return orderRepository.findByCustomer(customer);
     }
 
     public List<Order> getOrdersByProduct(Long id) {
-        Product product= productService.findProductById(id);
+        var product= productService.findProductById(id);
         return  orderRepository.findByProduct(product);
     }
 
     public Order addExistingOrderLineToOrder(Long idOrder, Long idOrderL) {
-        OrderLine orderLine = orderLineService.findById(idOrderL);
+        var orderLine = orderLineService.findById(idOrderL);
         return addOrderLineToOrder(idOrder,orderLine);
     }
 }

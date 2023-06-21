@@ -1,24 +1,17 @@
-package com.KuehneNagel.SpringAssessement.model;
+package com.KuehneNagel.SpringAssessement.dto;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
-@Entity
 @Data
-public class Product {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class ProductDTO {
     private long id;
     @NotBlank(message = "Product name must not be blank")
     private String name;
     private String skuCode;
     @NotNull(message = "Product price must not be null")
-    @Min(value = 1, message = "Product price must be greater than or equal to 0")
+    @Min(value = 0, message = "Product price must be greater than or equal to 0")
     private double unitPrice;
 }
